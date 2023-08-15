@@ -1,8 +1,10 @@
-openapi: 3.0.3
+openapi: 3.1.0
 info:
   title: Java API Exercise - Core Criteria
-  description: |-
-  version: 0.2.2
+  description: Core API for the Requests and Responses Exercise
+  version: 0.2.3
+  contact:
+    name: Responses and Requests Exercise
 
 servers:
   - url: http://localhost:4000
@@ -14,7 +16,8 @@ paths:
     post:
       tags:
         - students
-      summary: Create a student
+      operationId: createStudent
+      summary: Create a new student
       description: Add a new student to the list
       requestBody:
         content:
@@ -22,7 +25,8 @@ paths:
             schema:
               $ref: '#/components/schemas/CreateStudent'
       responses:
-        201:
+        '201':
+          description: Student created
           content:
             application/json:
               schema:
@@ -32,20 +36,31 @@ paths:
         - students
       summary: Get all students
       description: Get all students from the list
+      operationId: getStudents
       responses:
-        200:
+        '200':
+          description: Get all students
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AllStudents'
   /students/{firstName}:
     get:
+      parameters:
+        - name: firstName
+          in: path
+          description: First name of the student
+          required: true
+          schema:
+            type: string
       tags:
         - students
       summary: Get a student
       description: Get a single student by their first name
+      operationId: getSpecificStudent
       responses:
-        200:
+        '200':
+          description: Get a single student
           content:
             application/json:
               schema:
@@ -55,6 +70,7 @@ paths:
         - students
       summary: Update a student
       description: Update a student's details using the firstName provided. Just update the first student found in the list with the provided first name.
+      operationId: updateStudent
       parameters:
         - name: firstName
           in: path
@@ -68,7 +84,8 @@ paths:
             schema:
               $ref: '#/components/schemas/CreateStudent'
       responses:
-        201:
+        '201':
+          description: Student successfully created
           content:
             application/json:
               schema:
@@ -78,6 +95,7 @@ paths:
         - students
       summary: Delete a student
       description: Remove a student from the list and send that student back to the client
+      operationId: deleteStudent
       parameters:
         - name: firstName
           in: path
@@ -86,7 +104,8 @@ paths:
           schema:
             type: string
       responses:
-        200:
+        '200':
+          description: Successfully deleted student
           content:
             application/json:
               schema:
@@ -98,13 +117,15 @@ paths:
         - languages
       summary: Create a language
       description: Add a new language to the list
+      operationId: createLanguage
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateLanguage'
       responses:
-        201:
+        '201':
+          description: Language created
           content:
             application/json:
               schema:
@@ -114,20 +135,31 @@ paths:
         - languages
       summary: Get all languages
       description: Get all languages from the list
+      operationId: getLanguages
       responses:
-        200:
+        '200':
+          description: Get all languages
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AllLanguages'
   /languages/{name}:
     get:
+      parameters:
+        - name: name
+          in: path
+          description: Name of language
+          required: true
+          schema:
+            type: string
       tags:
         - languages
       summary: Get a language
       description: Get a single language by name
+      operationId: getSpecificLanguage
       responses:
-        200:
+        '200':
+          description: Get one language from the list
           content:
             application/json:
               schema:
@@ -137,6 +169,7 @@ paths:
         - languages
       summary: Update a language
       description: Update a language's name. Just update the first language found in the list with the provided name.
+      operationId: updateLanguage
       parameters:
         - name: name
           in: path
@@ -150,7 +183,8 @@ paths:
             schema:
               $ref: '#/components/schemas/CreateLanguage'
       responses:
-        201:
+        '201':
+          description: Successfully updated language
           content:
             application/json:
               schema:
@@ -160,6 +194,7 @@ paths:
         - languages
       summary: Delete a language
       description: Remove a language from the list and send that language back to the client
+      operationId: deleteLanguage
       parameters:
         - name: name
           in: path
@@ -168,7 +203,8 @@ paths:
           schema:
             type: string
       responses:
-        200:
+        '200':
+          description: Successfully deleted language
           content:
             application/json:
               schema:
