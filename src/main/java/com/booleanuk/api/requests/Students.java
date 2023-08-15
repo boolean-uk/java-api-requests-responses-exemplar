@@ -39,6 +39,7 @@ public class Students {
     }
 
     @PutMapping("/{firstName}")
+    @ResponseStatus(HttpStatus.CREATED)
     public Student updateStudent(@PathVariable String firstName, @RequestBody Student studentDetails) {
         Student updatedStudent = null;
         for (int i = 0; i < this.students.size(); i++) {
